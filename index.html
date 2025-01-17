@@ -39,11 +39,6 @@
             cursor: pointer;
             margin-top: 20px;
         }
-        #counter {
-            font-size: 50px;
-            margin-top: 20px;
-            color: rgb(165, 255, 219);
-        }
         audio {
             display: none; /* 오디오를 숨김 */
         }
@@ -54,10 +49,6 @@
     <img src="c31b2c43e009e3bf6927eaadc6ca4adf-removebg-preview.png">
     <h1>아준아 생축</h1>
 
-    <!-- 아준이의 생일을 축하합니다 버튼 -->
-    <button id="birthdayButton">아준이의 생일을 축하합니다!</button>
-    <div id="counter">0</div> <!-- 숫자 표시 -->
-
     <!-- 오디오 재생 버튼 -->
     <button id="playAudioButton">노래 키기</button>
 
@@ -67,40 +58,10 @@
     </audio>
 
     <script>
-        // 숫자와 버튼을 가져옵니다
-        const counterElement = document.getElementById('counter');
-        const birthdayButton = document.getElementById('birthdayButton');
+        // 오디오 재생 버튼 클릭 시 오디오 재생
         const playAudioButton = document.getElementById('playAudioButton');
         const audio = document.getElementById('audio');
 
-        // localStorage에서 저장된 숫자 값을 가져옵니다 (없으면 0으로 설정)
-        let currentCount = localStorage.getItem('count') ? parseInt(localStorage.getItem('count')) : 0;
-        counterElement.innerText = currentCount;
-
-        // localStorage에서 'clicked' 값 확인 (이미 클릭했는지)
-        if (localStorage.getItem('clicked') !== 'true') {
-            birthdayButton.addEventListener('click', function() {
-                // 버튼 클릭 시 숫자 증가
-                currentCount++;
-                counterElement.innerText = currentCount;
-
-                // 숫자 값을 localStorage에 저장
-                localStorage.setItem('count', currentCount);
-
-                // 클릭 여부를 localStorage에 저장
-                localStorage.setItem('clicked', 'true');
-                
-                // 버튼 텍스트 변경
-                birthdayButton.textContent = '축하합니다! 이미 클릭되었습니다.';
-                birthdayButton.disabled = true;  // 버튼 비활성화
-            });
-        } else {
-            // 이미 클릭된 경우 버튼 텍스트와 상태 변경
-            birthdayButton.textContent = '축하합니다! 이미 클릭되었습니다.';
-            birthdayButton.disabled = true;
-        }
-
-        // 오디오 재생 버튼 클릭 시 오디오 재생
         playAudioButton.addEventListener('click', function() {
             audio.play(); // 오디오 재생
             playAudioButton.disabled = true; // 오디오 버튼 비활성화
@@ -109,3 +70,4 @@
     </script>
 </body>
 </html>
+
