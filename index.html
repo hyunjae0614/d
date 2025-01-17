@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>아준아 생축</title> 
+    <style>
+        body {
+            background: linear-gradient(to right, rgb(255, 212, 195), rgb(255, 113, 113));
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            position: relative;
+            font-family: "Do Hyeon", sans-serif; /* 폰트 적용 */
+        }
+        img {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 500px;
+            height: auto;
+        }
+        h1 {
+            color: rgb(165, 255, 219);
+            font-size: 100px;
+            text-align: center;
+            margin-top: 350px;
+        }
+        button {
+            font-size: 20px;
+            padding: 10px 20px;
+            background-color: #ff7f7f;
+            border: none;
+            color: white;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        #counter {
+            font-size: 50px;
+            margin-top: 20px;
+            color: rgb(165, 255, 219);
+        }
+        audio {
+            display: none; /* 오디오를 숨김 */
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet"> <!-- 폰트 추가 -->
+</head>
+<body>
+    <img src="c31b2c43e009e3bf6927eaadc6ca4adf-removebg-preview.png">
+    <h1>아준아 생축</h1>
+
+    <!-- 아준이의 생일을 축하합니다 버튼 -->
+    <button id="birthdayButton">아준이의 생일을 축하합니다!</button>
+    <div id="counter">0</div> <!-- 숫자 표시 -->
+
+    <!-- 오디오 재생 버튼 -->
+    <button id="playAudioButton">노래 키기</button>
+
+    <audio id="audio" preload="auto">
+        <source src="happy-birthday-to-you-piano-version-13976.mp3" type="audio/mp3">
+        이 브라우저는 오디오를 지원하지 않습니다.
+    </audio>
+
+    <script>
+        // 숫자와 버튼을 가져옵니다
+        const counterElement = document.getElementById('counter');
+        const birthdayButton = document.getElementById('birthdayButton');
+        const playAudioButton = document.getElementById('playAudioButton');
+        const audio = document.getElementById('audio');
+
+        // localStorage에서 저장된 숫자 값을 가져옵니다 (없으면 0으로 설정)
+        let currentCount = localStorage.getItem('count') ? parseInt(localStorage.getItem('count')) : 0;
+        counterElement.innerText = currentCount;
+
+        // localStorage에서 'clicked' 값 확인 (이미 클릭했는지)
+        if (localStorage.getItem('clicked') !== 'true') {
+            birthdayButton.addEventListener('click', function() {
+                // 버튼 클릭 시 숫자 증가
+                currentCount++;
+                counterElement.innerText = currentCount;
+
+                // 숫자 값을 localStorage에 저장
+                localStorage.setItem('count', currentCount);
+
+                // 클릭 여부를 localStorage에 저장
+                localStorage.setItem('clicked', 'true');
+                
+                // 버튼 텍스트 변경
+                birthdayButton.textContent = '축하합니다! 이미 클릭되었습니다.';
+                birthdayButton.disabled = true;  // 버튼 비활성화
+            });
+        } else {
+            // 이미 클릭된 경우 버튼 텍스트와 상태 변경
+            birthdayButton.textContent = '축하합니다! 이미 클릭되었습니다.';
+            birthdayButton.disabled = true;
+        }
+
+        // 오디오 재생 버튼 클릭 시 오디오 재생
+        playAudioButton.addEventListener('click', function() {
+            audio.play(); // 오디오 재생
+            playAudioButton.disabled = true; // 오디오 버튼 비활성화
+            playAudioButton.textContent = '노래가 재생되고 있습니다!';
+        });
+    </script>
+</body>
+</html>
